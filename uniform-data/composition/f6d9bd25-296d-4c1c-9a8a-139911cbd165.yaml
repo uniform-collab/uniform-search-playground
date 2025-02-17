@@ -14,7 +14,7 @@ composition:
         parameters:
           filterOptions:
             type: text
-            value: title,tags.name
+            value: Category:category.name, Tags:tags.name
   _dataResources:
     Query Article Content:
       type: queryArticle
@@ -23,5 +23,5 @@ composition:
         filters: '{"type[eq]":"article"}'
         contentTypes: article
 created: '2025-02-15T16:10:06.844929+00:00'
-modified: '2025-02-17T00:58:27.71805+00:00'
+modified: '2025-02-17T22:35:20.017543+00:00'
 pattern: false

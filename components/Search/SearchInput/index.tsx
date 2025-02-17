@@ -11,7 +11,17 @@ function SearchInput({ onSearch }: SearchInputProps) {
 
   return (
     <input
-      className="search-input"
+      className="
+        search-input
+        w-full
+        p-2
+        border
+        rounded-md
+        focus:outline-none
+        focus:ring-2
+        focus:ring-blue-400
+        transition-shadow
+      "
       type="text"
       placeholder="Search articles..."
       onChange={handleChange}

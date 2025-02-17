@@ -1,21 +1,18 @@
-created: '2025-02-15T16:45:53.993082+00:00'
-modified: '2025-02-17T22:16:11.835695+00:00'
+created: '2025-02-17T22:09:56.74561+00:00'
+modified: '2025-02-17T22:10:33.699843+00:00'
 pattern: false
 entry:
-  _id: 0aa6eb61-4647-4140-8e86-69e0a8cbd7cd
-  _name: Introduction to Machine Learning with Python
-  _slug: article-3
+  _id: 08d31008-31de-43ad-9047-e89d6e3c4816
+  _name: 'Data-Driven Marketing: Making Smarter Decisions'
+  _slug: email-marketing-trends-and-best-practices
   type: article
   fields:
     tags:
       type: contentReference
-      value: ${#jptr:/ref-0aa6eb61-4647-4140-8e86-69e0a8cbd7cd-tags/entries}
+      value: ${#jptr:/ref-74d6ded1-a6fd-49a4-b220-a42b63ea92b4-tags/entries}
     title:
       type: text
-      value: Introduction to Machine Learning with Python
-    category:
-      type: contentReference
-      value: ${#jptr:/ref-0aa6eb61-4647-4140-8e86-69e0a8cbd7cd-category/entries/0}
+      value: 'Data-Driven Marketing: Making Smarter Decisions'
     description:
       type: richText
       value:
@@ -32,9 +29,8 @@ entry:
               children:
                 - mode: normal
                   text: >-
-                    An introductory guide to using Python for machine learning,
-                    covering essential libraries like TensorFlow and
-                    Scikit-learn.
+                    Harness the power of data analytics to refine your marketing
+                    strategies and improve campaign performance.
                   type: text
                   style: ''
                   detail: 0
@@ -45,11 +41,11 @@ entry:
               textFormat: 0
           direction: ltr
   _dataResources:
-    ref-0aa6eb61-4647-4140-8e86-69e0a8cbd7cd-tags:
+    ref-0e814f95-1907-440e-ba58-ef66e9499a60-tags:
       type: uniformContentInternalReference
       variables:
         entryIds: 0b962670-894b-4b1a-bbab-a05fa67d0b08
-    ref-0aa6eb61-4647-4140-8e86-69e0a8cbd7cd-category:
+    ref-74d6ded1-a6fd-49a4-b220-a42b63ea92b4-tags:
       type: uniformContentInternalReference
       variables:
-        entryIds: f43f8153-ddc5-4112-a145-c0e3c9415610
+        entryIds: 670c1471-f4b8-46b4-bd57-34d8f519d06d

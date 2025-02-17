@@ -1,21 +1,18 @@
-created: '2025-02-15T16:45:53.993082+00:00'
-modified: '2025-02-17T22:16:11.835695+00:00'
+created: '2025-02-17T11:08:52.344607+00:00'
+modified: '2025-02-17T22:08:44.535743+00:00'
 pattern: false
 entry:
-  _id: 0aa6eb61-4647-4140-8e86-69e0a8cbd7cd
-  _name: Introduction to Machine Learning with Python
-  _slug: article-3
+  _id: d4153e23-0a59-43fc-a722-149cd03c4d12
+  _name: 'Crafting Compelling Content: A Marketer''s Guide'
+  _slug: article-6
   type: article
   fields:
     tags:
       type: contentReference
-      value: ${#jptr:/ref-0aa6eb61-4647-4140-8e86-69e0a8cbd7cd-tags/entries}
+      value: ${#jptr:/ref-d4153e23-0a59-43fc-a722-149cd03c4d12-tags/entries}
     title:
       type: text
-      value: Introduction to Machine Learning with Python
-    category:
-      type: contentReference
-      value: ${#jptr:/ref-0aa6eb61-4647-4140-8e86-69e0a8cbd7cd-category/entries/0}
+      value: 'Crafting Compelling Content: A Marketer''s Guide'
     description:
       type: richText
       value:
@@ -32,9 +29,9 @@ entry:
               children:
                 - mode: normal
                   text: >-
-                    An introductory guide to using Python for machine learning,
-                    covering essential libraries like TensorFlow and
-                    Scikit-learn.
+                    Learn how to create engaging content that resonates with
+                    your audience and drives conversions with this comprehensive
+                    guide.
                   type: text
                   style: ''
                   detail: 0
@@ -49,7 +46,7 @@ entry:
       type: uniformContentInternalReference
       variables:
         entryIds: 0b962670-894b-4b1a-bbab-a05fa67d0b08
-    ref-0aa6eb61-4647-4140-8e86-69e0a8cbd7cd-category:
+    ref-d4153e23-0a59-43fc-a722-149cd03c4d12-tags:
       type: uniformContentInternalReference
       variables:
-        entryIds: f43f8153-ddc5-4112-a145-c0e3c9415610
+        entryIds: 670c1471-f4b8-46b4-bd57-34d8f519d06d

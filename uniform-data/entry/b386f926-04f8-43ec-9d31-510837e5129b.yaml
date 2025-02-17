@@ -1,9 +1,9 @@
 created: '2025-02-15T16:45:31.557664+00:00'
-modified: '2025-02-17T00:09:36.327759+00:00'
+modified: '2025-02-17T22:06:40.299494+00:00'
 pattern: false
 entry:
   _id: b386f926-04f8-43ec-9d31-510837e5129b
-  _name: Article 2
+  _name: A Guide to Responsive Design in Web Development
   _slug: article-2
   type: article
   fields:
@@ -12,7 +12,7 @@ entry:
       value: ${#jptr:/ref-b386f926-04f8-43ec-9d31-510837e5129b-tags/entries}
     title:
       type: text
-      value: Article 2
+      value: A Guide to Responsive Design in Web Development
     description:
       type: richText
       value:
@@ -28,7 +28,9 @@ entry:
               version: 1
               children:
                 - mode: normal
-                  text: Content for Article 2
+                  text: >-
+                    Learn techniques for building responsive web applications
+                    that adapt seamlessly to different devices and screen sizes.
                   type: text
                   style: ''
                   detail: 0

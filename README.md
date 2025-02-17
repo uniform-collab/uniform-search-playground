@@ -29,7 +29,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 ### Atom Components
 
 - **[SearchInput](https://github.com/ArtemNizelnyk/uniform-search-playground/blob/main/nextjs-app-router/components/Search/SearchInput/index.tsx)**: A simple input field allowing users to input search terms, designed specifically for use within the `ArticleSearchComponent`.
-- **[FilterDropdown](https://github.com/ArtemNizelnyk/uniform-search-playground/blob/main/nextjs-app-router/components/FilterDropdown/index.tsx)**: A dropdown component that lets users filter search results based on predefined facets, interacting with Uniform facets to apply specific content filters.
+- **[FilterPanel](https://github.com/ArtemNizelnyk/uniform-search-playground/blob/main/nextjs-app-router/components/Search/FilterPanel/index.tsx)**: A filter panel component that lets users filter search results based on predefined facets, interacting with Uniform facets to apply specific content filters.
 - **[ArticleCard](https://github.com/ArtemNizelnyk/uniform-search-playground/blob/main/nextjs-app-router/components/Search/ArticleCard/index.tsx)**: Renders individual articles, displaying titles and descriptions to provide a clean visual representation of the search results within the `ArticleSearchComponent`.
 
 ### API Endpoint
@@ -47,7 +47,9 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 - **[Component Definition](https://github.com/ArtemNizelnyk/uniform-search-playground/blob/main/nextjs-app-router/uniform-data/component/articleSearchComponent.yaml)**: Defines the `ArticleSearchComponent` in Uniform, specifically its `filterOptions` parameter, which controls the facets used in the search functionality. 
 Syntax for fields: `fieldName` 
 Syntax for reference fields: `refFieldName.fieldName` 
-By default uses: `title,tags.name` to facetBy `title` and `tags.name` of the Article content type
+Syntax for `ArticleSearchComponent`'s `filterOptions` parameter: `label:fieldName`
+where `label` is the label of the facet in the UI and fieldName is the field on the Article content type that will be used to filter the results.
+By default uses: `Category:category.name,Tags:tags.name` to facetBy `Category` and `Tags` of the Article content type
 
 ## Extending the Search Functionality
 
@@ -57,7 +59,7 @@ To create a new `SearchComponent` that supports other entry types beyond Article
 
 2. **Clone and Modify ArticleSearchComponent**: Copy the `ArticleSearchComponent` and adapt its logic to interact with the new entry type. Adjust the `getKnowledgeBaseArticles` function or create a similar one to query the new data.
 
-3. **Adjust Atom Components**: Update `SearchInput`, `FilterDropdown`, and `ArticleCard` to accommodate specific fields or behaviors relevant to the new entry type. Ensure that any data-specific logic is adjusted appropriately.
+3. **Adjust Atom Components**: Update `SearchInput`, `FilterPanel`, and `ArticleCard` to accommodate specific fields or behaviors relevant to the new entry type. Ensure that any data-specific logic is adjusted appropriately.
 
 4. **Update API Configuration**: If necessary, extend or modify existing API routes to cater to the new entry type, focusing on how data is fetched or manipulated.
 

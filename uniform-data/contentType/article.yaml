@@ -1,7 +1,7 @@
 id: article
 name: Article
 created: '2025-02-15T16:13:36.770369+00:00'
-updated: '2025-02-17T00:08:39.170396+00:00'
+updated: '2025-02-17T22:15:05.800769+00:00'
 slugSettings: {}
 useTeamPermissions: true
 fields:
@@ -51,6 +51,12 @@ fields:
       isMulti: true
       allowedContentTypes:
         - tag
+  - id: category
+    name: Category
+    type: contentReference
+    typeConfig:
+      allowedContentTypes:
+        - category
 entryName: title
 icon: file-document
 type: contentType

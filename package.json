@@ -13,11 +13,14 @@
     "uniform:publish": "uniform context manifest publish"
   },
   "dependencies": {
+    "@tailwindcss/postcss": "^4.0.6",
     "@uniformdev/canvas-next-rsc": "19.214.0",
     "@uniformdev/richtext": "^19.214.0",
     "next": "^14.2.16",
+    "postcss": "^8.5.2",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "tailwindcss": "^4.0.6"
   },
   "devDependencies": {
     "@types/node": "^18.0.0",

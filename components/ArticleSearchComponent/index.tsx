@@ -1,7 +1,6 @@
 "use client";
 import React, { useState, useEffect, Suspense, lazy } from "react";
 import SearchInput from "../Search/SearchInput/index";
-import FilterDropdown from "../FilterDropdown";
 import { ComponentProps } from "@uniformdev/canvas-next-rsc/component";
 import { Slots, Parameters } from "./props";
 import {
@@ -9,8 +8,10 @@ import {
   Facets,
   KnowledgeBaseArticle,
 } from "@/types/search";
+import { Facet } from "../Search/FilterPanel";
 
 const ArticleCard = lazy(() => import("../Search/ArticleCard"));
+const FilterPanel = lazy(() => import("../Search/FilterPanel"));
 
 export const ArticleSearchComponent = ({
   component,
@@ -23,19 +24,32 @@ export const ArticleSearchComponent = ({
   const [articles, setArticles] = useState<KnowledgeBaseArticle[] | null>(null);
   const [facets, setFacets] = useState<Facets>({});
   const [initialFacets, setInitialFacets] = useState<Facets>({});
+  const [filterDefs, setFilterDefs] = useState<{ filterName: string; filterField: string }[]>([]);
 
   useEffect(() => {
     const fetchArticles = async () => {
       try {
-        // Handle empty or undefined filterOptions
+        console.log(filterOptions)
         const optionsArray = filterOptions
           .split(",")
-          .map((option) => option.trim());
+          .map((pair) => pair.trim())
+          .filter(Boolean);
 
-        const facetByParams =
-          optionsArray.length > 0
-            ? `${optionsArray.map((option) => `fields.${option}`).join(",")}`
-            : "";
+        console.log(optionsArray)
+        // For each comma-separated pair, we get:
+        //  e.g. "Category:category.name" -> { filterName: "Category", filterField: "fields.category.name" }
+        const pairs = optionsArray.map((item) => {
+          const [filterName, filterField] = item.split(":").map((s) => s.trim());
+          return { filterName, filterField: "fields." + filterField };
+        });
+
+        //save pairs for FilterPanel
+        setFilterDefs(pairs);
+        // Build the facetBy string
+        // e.g. "fields.category.name,fields.tags.name"
+        const facetByParams = pairs
+          .map((p) => `${p.filterField}`)
+          .join(",");
 
         const response = await fetch(
           `/api/search?search=${encodeURIComponent(
@@ -44,10 +58,10 @@ export const ArticleSearchComponent = ({
             JSON.stringify(filters)
           )}&facetBy=${facetByParams}`
         );
-
         const data: ArticlesWithPagination = await response.json();
         setArticles(data.items);
 
+        // Store initial facets only once
         if (!Object.keys(initialFacets).length) {
           setInitialFacets(data.facets);
         }
@@ -57,91 +71,106 @@ export const ArticleSearchComponent = ({
         setArticles([]);
       }
     };
-
     fetchArticles();
   }, [searchTerm, filters, filterOptions]);
 
-  const handleFilterChange = (filter: Record<string, string>) => {
+  const handleFilterPanelChange = (filter: Record<string, string | null>) => {
+    // If the user unchecks a box, remove that filter from state
+    // If the user checks a box, set that filter
     const [facetName, value] = Object.entries(filter)[0];
+    setFilters((prev) => {
+      if (!value) {
+        const temp = { ...prev };
+        delete temp[facetName];
+        return temp;
+      }
+      return { ...prev, [facetName]: { eq: value } };
+    });
+  };
 
-    if (!value) {
-      setFilters((prev) => {
-        const { [facetName]: _, ...rest } = prev;
-        return rest;
-      });
-    } else {
-      const newFilter = { [facetName]: { eq: value } };
-      setFilters((prev) => ({
-        ...prev,
-        ...newFilter,
-      }));
-    }
+  // Turn the initialFacets object into an array of { name, buckets } for FilterPanel
+  const facetArray: Facet[] = Object.entries(initialFacets).map(
+    ([facetName, facetValues]) => ({
+      name: facetName,
+      buckets: Object.entries(facetValues || {}).map(([val, count]) => ({
+        value: val,
+        count,
+      })),
+    })
+  );
+
+  // Example: gather currently applied filters for displaying badges
+  const activeFilters = Object.entries(filters).map(([facetName, filterObj]) =>
+    filterObj.eq ? filterObj.eq : ""
+  );
+
+  const clearAllFilters = () => {
+    setFilters({});
   };
 
   return (
-    <div>
-      <div
-        style={{
-          display: "flex",
-          alignItems: "flex-start",
-          gap: "10px",
-          marginBottom: "20px",
-          flexWrap: "wrap",
-        }}
-      >
-        <div style={{ flex: "1 1 100%", minWidth: "150px" }}>
-          <SearchInput onSearch={setSearchTerm} />
-        </div>
-        {(initialFacets || facets) &&
-          Object.entries(initialFacets).map(([facetName, facetValues]) => (
-            <div key={facetName} style={{ flex: "1 1 10%", minWidth: "150px" }}>
-              <FilterDropdown
-                key={facetName}
-                facet={{
-                  name: facetName,
-                  buckets: Object.entries(facetValues || {}).map(
-                    ([value, count]) => ({
-                      value,
-                      count,
-                    })
-                  ),
-                }}
-                onFilterChange={handleFilterChange}
-              />
-            </div>
-          ))}
-      </div>
+    <div className="min-h-screen bg-gray-50 flex">
+      {/* Left column: Filters */}
+      <aside className="w-64 bg-white border-r p-4 hidden sm:block">
+        <FilterPanel facets={facetArray} filterDefs={filterDefs} onChange={handleFilterPanelChange} />
+      </aside>
 
-      <Suspense fallback={<p>Loading articles...</p>}>
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(3, 1fr)",
-            gap: "16px",
-            marginTop: "20px",
-          }}
-        >
-          {articles === null ? (
-            <p>Loading articles...</p>
-          ) : articles.length > 0 ? (
-            articles.map((article) => (
+      {/* Right column: Search Input, filter badges, results */}
+      <main className="flex-1 p-6">
+        {/* Search bar */}
+        <SearchInput onSearch={setSearchTerm} />
+
+        {/* Active filter badges + “Clear all” */}
+        {activeFilters.length > 0 && (
+          <div className="flex items-center flex-wrap gap-2 my-4">
+            {activeFilters.map((val) => (
               <div
-                key={article.id}
-                style={{ border: "1px solid #ccc", padding: "16px" }}
+                key={val}
+                className="px-2 py-1 bg-gray-200 text-gray-700 rounded-full text-sm"
               >
-                <ArticleCard
-                  title={article.title}
-                  description={article.description}
-                />
+                {val} ✕
               </div>
-            ))
-          ) : (
-            <p>No articles found. Try adjusting your search or filters.</p>
-          )}
-        </div>
-      </Suspense>
+            ))}
+            <button
+              onClick={clearAllFilters}
+              className="text-blue-600 text-sm ml-auto"
+            >
+              Clear all
+            </button>
+          </div>
+        )}
+
+        {/* Results */}
+        <Suspense fallback={<p>Loading articles...</p>}>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-4">
+            {articles === null ? (
+              <p>Loading articles...</p>
+            ) : articles.length > 0 ? (
+              articles.map((article) => (
+                <ArticleCardWrapper key={article.id} article={article} />
+              ))
+            ) : (
+              <p>No articles found. Try adjusting your search or filters.</p>
+            )}
+          </div>
+        </Suspense>
+      </main>
     </div>
   );
 };
+
+// Helper for lazy-loaded ArticleCard
+function ArticleCardWrapper({ article }: { article: KnowledgeBaseArticle }) {
+  return (
+    <div className="bg-white border rounded-md p-4 shadow-sm">
+      <Suspense fallback={<p>Loading card...</p>}>
+        <ArticleCard
+          title={article.title}
+          description={article.description}
+        />
+      </Suspense>
+    </div>
+  );
+}
 
 export default ArticleSearchComponent;
