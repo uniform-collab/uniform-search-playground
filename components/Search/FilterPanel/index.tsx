@@ -32,10 +32,9 @@ export default function FilterPanel({ facets, onChange, filterDefs }: FilterPane
             [facetName]: checked ? bucketValue : null,
         });
     };
-console.log(filterDefs)
+
     return (
         <div className="space-y-6">
-            <h2 className="text-xl font-bold mb-2">Filters</h2>
             {facets.map((facet) => (
                 <div key={filterDefs.find(def => def.filterField === facet.name)?.filterName || facet.name}>
                     <h3 className="font-semibold mb-2">{filterDefs.find(def => def.filterField === facet.name)?.filterName || facet.name}</h3>

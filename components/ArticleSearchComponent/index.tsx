@@ -109,51 +109,95 @@ export const ArticleSearchComponent = ({
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex">
-      {/* Left column: Filters */}
-      <aside className="w-64 bg-white border-r p-4 hidden sm:block">
-        <FilterPanel facets={facetArray} filterDefs={filterDefs} onChange={handleFilterPanelChange} />
-      </aside>
-
-      {/* Right column: Search Input, filter badges, results */}
-      <main className="flex-1 p-6">
-        {/* Search bar */}
-        <SearchInput onSearch={setSearchTerm} />
-
-        {/* Active filter badges + “Clear all” */}
-        {activeFilters.length > 0 && (
-          <div className="flex items-center flex-wrap gap-2 my-4">
-            {activeFilters.map((val) => (
-              <div
-                key={val}
-                className="px-2 py-1 bg-gray-200 text-gray-700 rounded-full text-sm"
-              >
-                {val} ✕
+    <div className="min-h-screen bg-gray-50">
+      {/* Fixed left panel */}
+      <aside className="fixed top-0 left-0 w-64 h-screen bg-white border-r p-4 hidden sm:block overflow-y-auto">
+        <h2 className="text-xl font-bold mb-4">Filters</h2>
+        <Suspense fallback={
+          <div className="animate-pulse space-y-4">
+            {[...Array(3)].map((_, i) => (
+              <div key={i} className="space-y-2">
+                <div className="h-5 bg-gray-200 rounded w-1/2" />
+                <div className="space-y-2">
+                  {[...Array(4)].map((_, j) => (
+                    <div key={j} className="flex items-center space-x-2">
+                      <div className="h-4 w-4 bg-gray-200 rounded" />
+                      <div className="h-4 bg-gray-200 rounded w-2/3" />
+                    </div>
+                  ))}
+                </div>
               </div>
             ))}
-            <button
-              onClick={clearAllFilters}
-              className="text-blue-600 text-sm ml-auto"
-            >
-              Clear all
-            </button>
           </div>
-        )}
-
-        {/* Results */}
-        <Suspense fallback={<p>Loading articles...</p>}>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-4">
-            {articles === null ? (
-              <p>Loading articles...</p>
-            ) : articles.length > 0 ? (
-              articles.map((article) => (
-                <ArticleCardWrapper key={article.id} article={article} />
-              ))
-            ) : (
-              <p>No articles found. Try adjusting your search or filters.</p>
-            )}
-          </div>
+        }>
+          <FilterPanel 
+            facets={facetArray} 
+            filterDefs={filterDefs} 
+            onChange={handleFilterPanelChange} 
+          />
         </Suspense>
+      </aside>
+
+      {/* Main content area with left margin */}
+      <main className="sm:ml-64 min-h-screen p-6">
+        <div className="max-w-7xl mx-auto">
+          <SearchInput onSearch={setSearchTerm} />
+
+          {activeFilters.length > 0 && (
+            <div className="flex items-center flex-wrap gap-2 my-4">
+              {activeFilters.map((val) => (
+                <div
+                  key={val}
+                  className="px-2 py-1 bg-gray-200 text-gray-700 rounded-full text-sm"
+                >
+                  {val} ✕
+                </div>
+              ))}
+              <button
+                onClick={clearAllFilters}
+                className="text-blue-600 text-sm ml-auto"
+              >
+                Clear all
+              </button>
+            </div>
+          )}
+
+          <div className="mt-4">
+            <Suspense 
+              fallback={
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                  {[...Array(6)].map((_, i) => (
+                    <div key={i} className="bg-white border rounded-md p-4 h-64 animate-pulse">
+                      <div className="aspect-[3/2] bg-gray-200 mb-4" />
+                      <div className="h-4 bg-gray-200 rounded w-3/4 mb-2" />
+                      <div className="h-4 bg-gray-200 rounded w-1/2" />
+                    </div>
+                  ))}
+                </div>
+              }
+            >
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                {articles === null ? (
+                  [...Array(6)].map((_, i) => (
+                    <div key={i} className="bg-white border rounded-md p-4 h-64 animate-pulse">
+                      <div className="aspect-[3/2] bg-gray-200 mb-4" />
+                      <div className="h-4 bg-gray-200 rounded w-3/4 mb-2" />
+                      <div className="h-4 bg-gray-200 rounded w-1/2" />
+                    </div>
+                  ))
+                ) : articles.length > 0 ? (
+                  articles.map((article) => (
+                    <ArticleCardWrapper key={article.id} article={article} />
+                  ))
+                ) : (
+                  <div className="col-span-full py-8 text-center text-gray-500">
+                    No articles found. Try adjusting your search or filters.
+                  </div>
+                )}
+              </div>
+            </Suspense>
+          </div>
+        </div>
       </main>
     </div>
   );
