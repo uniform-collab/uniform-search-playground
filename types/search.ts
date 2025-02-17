@@ -5,8 +5,14 @@ import { RichTextNode } from "@uniformdev/richtext";
 interface KnowledgeBaseArticle {
   id: string;
   title: string;
-  description: RichTextNode;
+  description: RichTextDescription;
   // Add other necessary fields if needed
+}
+interface RichTextDescription {
+  type: string;
+  value: {
+    root: any; // Use the proper type if available
+  };
 }
 
 // Define the structure of the response from the API
@@ -33,4 +39,5 @@ export {
   type ArticlesWithPagination,
   type Facets,
   type FacetValueCounts,
+  type RichTextDescription,
 };

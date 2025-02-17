@@ -1,11 +1,5 @@
-import { RichTextNode } from "@uniformdev/richtext";
+import { RichTextDescription } from "@/types/search";
 
-interface RichTextDescription {
-  type: string;
-  value: {
-    root: any; // Use the proper type if available
-  };
-}
 export type Parameters = {
   title: string;
   description: RichTextDescription;
