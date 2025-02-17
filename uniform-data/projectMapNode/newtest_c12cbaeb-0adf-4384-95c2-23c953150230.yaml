@@ -1,9 +1,0 @@
-id: c12cbaeb-0adf-4384-95c2-23c953150230
-name: newTest
-order: 500
-path: /:category/:sub-category/:sub-sub-category/:product/newtest
-type: composition
-pathSegment: newtest
-data: {}
-compositionId: e53b6808-9a19-4c8c-be30-6baea7140e6f
-projectMapId: 8a35c419-5150-4f76-aa21-7e4976c9dfcb

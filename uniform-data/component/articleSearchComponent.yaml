@@ -1,17 +1,16 @@
 # yaml-language-server: $schema=<https://uniform.app/schemas/json-schema/component-definition/v1.json>
 $schema: https://uniform.app/schemas/json-schema/component-definition/v1.json
-id: myNewComponent3
-name: My New Component 3
+id: articleSearchComponent
+name: Article Search Component
 icon: screen
 parameters:
-  - id: test3
-    name: test3
+  - id: filterOptions
+    name: Filter Options
     type: text
     typeConfig: null
-    localizable: true
 useTeamPermissions: true
 slots: []
-titleParameter: test3
+titleParameter: filterOptions
 canBeComposition: false
-created: '2024-07-03T06:43:56.993588+00:00'
-updated: '2024-07-03T06:43:56.993588+00:00'
+created: '2025-02-17T00:54:34.193133+00:00'
+updated: '2025-02-17T00:54:34.193133+00:00'

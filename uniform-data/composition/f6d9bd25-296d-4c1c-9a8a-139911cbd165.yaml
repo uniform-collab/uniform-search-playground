@@ -1,7 +1,7 @@
 composition:
   _name: search
   _id: f6d9bd25-296d-4c1c-9a8a-139911cbd165
-  _slug: searcg
+  _slug: search
   type: page
   parameters:
     metaTitle:
@@ -9,8 +9,8 @@ composition:
       value: Search
   slots:
     content:
-      - _id: 448f2800-05af-4031-8a45-2b4e3f50fde1
-        type: searchPage
+      - _id: 062d2016-5470-47e8-b5cf-c629d3f197c9
+        type: articleSearchComponent
         parameters:
           filterOptions:
             type: text
@@ -23,5 +23,5 @@ composition:
         filters: '{"type[eq]":"article"}'
         contentTypes: article
 created: '2025-02-15T16:10:06.844929+00:00'
-modified: '2025-02-17T00:10:52.989073+00:00'
+modified: '2025-02-17T00:58:27.71805+00:00'
 pattern: false

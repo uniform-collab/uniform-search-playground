@@ -22,6 +22,8 @@ slots:
       - $p:41a4aa09-a6b5-4348-aa1d-f2509c813996
       - $p:7495fda9-2219-4f2b-957b-605897c1dcfd
       - searchPage
+      - searchComponent
+      - articleSearchComponent
     allowAllComponents: false
     inheritAllowedComponents: false
     patternsInAllowedComponents: true
@@ -32,4 +34,4 @@ slugSettings:
   regularExpressionMessage: ''
 canBeComposition: true
 created: '2024-07-02T07:35:10.856524+00:00'
-updated: '2025-02-15T16:48:38.884468+00:00'
+updated: '2025-02-17T00:57:02.181393+00:00'
