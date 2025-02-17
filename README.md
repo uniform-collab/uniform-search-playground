@@ -28,23 +28,26 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ### Atom Components
 
-- **SearchInput**: A simple input field allowing users to input search terms. It's designed specifically for use within the `ArticleSearchComponent`.
-- **FilterDropdown**: A dropdown component that lets users filter search results based on predefined facets. It interacts with Uniform facets to apply specific content filters.
-- **ArticleCard**: Renders individual articles, displaying titles and descriptions. It provides a clean visual representation of the search results within the `ArticleSearchComponent`.
+- **[SearchInput](https://github.com/ArtemNizelnyk/uniform-search-playground/blob/main/nextjs-app-router/components/Search/SearchInput/index.tsx)**: A simple input field allowing users to input search terms, designed specifically for use within the `ArticleSearchComponent`.
+- **[FilterDropdown](https://github.com/ArtemNizelnyk/uniform-search-playground/blob/main/nextjs-app-router/components/FilterDropdown/index.tsx)**: A dropdown component that lets users filter search results based on predefined facets, interacting with Uniform facets to apply specific content filters.
+- **[ArticleCard](https://github.com/ArtemNizelnyk/uniform-search-playground/blob/main/nextjs-app-router/components/Search/ArticleCard/index.tsx)**: Renders individual articles, displaying titles and descriptions to provide a clean visual representation of the search results within the `ArticleSearchComponent`.
 
 ### API Endpoint
 
-- **`/api/search/route.ts`**: Handles search functionality by querying the API to retrieve articles based on search terms and filters. It constructs queries and handles the integration with Uniform's backend services.
+- **[`/api/search/route.ts`](https://github.com/ArtemNizelnyk/uniform-search-playground/blob/main/nextjs-app-router/api/search/route.ts)**: Handles search functionality by querying the API to retrieve articles based on search terms and filters. It constructs queries and handles the integration with Uniform's backend services.
 
 ### Search Client
 
-- **`/uniform/search/client.ts`**: Contains the `getKnowledgeBaseArticles` function, essential for fetching articles from Uniform's backend. It facilitates querying, filtering, and processing articles, using Uniform's API for efficient data retrieval. For more details on working with the search API, developers can refer to [Uniform's documentation on search and filtering](https://docs.uniform.app/docs/knowledge-base/search-and-filtering).
+- **[`/uniform/search/client.ts`](https://github.com/ArtemNizelnyk/uniform-search-playground/blob/main/nextjs-app-router/uniform/search/client.ts)**: Contains the `getKnowledgeBaseArticles` function, essential for fetching articles from Uniform's backend. It facilitates querying, filtering, and processing articles, using Uniform's API for efficient data retrieval. For more details on working with the search API, developers can refer to [Uniform's documentation on search and filtering](https://docs.uniform.app/docs/knowledge-base/search-and-filtering).
 
 ### Uniform Configuration
 
-- **Search Composition**: Defined in `nextjs-app-router/uniform-data/composition/f6d9bd25-296d-4c1c-9a8a-139911cbd165.yaml`. This YAML file configures the search composition where `ArticleSearchComponent` is used, specifying the setup within Uniform's ecosystem.
+- **[Search Composition](https://github.com/ArtemNizelnyk/uniform-search-playground/blob/main/nextjs-app-router/uniform-data/composition/f6d9bd25-296d-4c1c-9a8a-139911cbd165.yaml)**: Configures the search composition where `ArticleSearchComponent` is used, specifying the setup within Uniform's ecosystem.
   
-- **Component Definition**: Found in `nextjs-app-router/uniform-data/component/articleSearchComponent.yaml`. This file defines the `ArticleSearchComponent` in Uniform, specifically its `filterOptions` parameter, which controls the facets used in the search functionality.
+- **[Component Definition](https://github.com/ArtemNizelnyk/uniform-search-playground/blob/main/nextjs-app-router/uniform-data/component/articleSearchComponent.yaml)**: Defines the `ArticleSearchComponent` in Uniform, specifically its `filterOptions` parameter, which controls the facets used in the search functionality. 
+Syntax for fields: `fieldName` 
+Syntax for reference fields: `refFieldName.fieldName` 
+By default uses: `title,tags.name` to facetBy `title` and `tags.name` of the Article content type
 
 ## Extending the Search Functionality
 

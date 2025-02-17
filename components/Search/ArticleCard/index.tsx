@@ -4,9 +4,14 @@ import { Parameters, Slots } from "./props";
 export const ArticleCard = ({ title, description }: Parameters) => {
   let htmlDescription = "";
 
-  if (description?.type === "richText" && description.value) {
+  if (
+    description?.type === "richText" &&
+    description.value &&
+    description.value.root
+  ) {
     htmlDescription = renderToHtml(description.value.root as RichTextNode);
   }
+
   if (!htmlDescription) {
     return <>dummy text</>;
   }
