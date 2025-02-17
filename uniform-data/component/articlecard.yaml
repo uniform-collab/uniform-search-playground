@@ -1,0 +1,51 @@
+# yaml-language-server: $schema=<https://uniform.app/schemas/json-schema/component-definition/v1.json>
+$schema: https://uniform.app/schemas/json-schema/component-definition/v1.json
+id: articlecard
+name: ArticleCard
+icon: toggle-square
+parameters:
+  - id: title
+    name: Title
+    type: text
+    typeConfig:
+      required: true
+  - id: description
+    name: Description
+    type: richText
+    typeConfig:
+      elements:
+        builtIn:
+          - h1
+          - h2
+          - h3
+          - h4
+          - h5
+          - h6
+          - unorderedList
+          - orderedList
+          - link
+          - quote
+          - code
+          - table
+          - asset
+          - variable
+      required: true
+      formatting:
+        builtIn:
+          - bold
+          - italic
+          - underline
+          - strikethrough
+          - code
+          - superscript
+          - subscript
+      elementsConfig:
+        asset:
+          allowedTypes:
+            - image
+useTeamPermissions: true
+slots: []
+titleParameter: title
+canBeComposition: false
+created: '2025-02-15T17:26:57.309117+00:00'
+updated: '2025-02-16T22:45:45.786904+00:00'

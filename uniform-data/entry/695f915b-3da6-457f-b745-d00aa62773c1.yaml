@@ -1,0 +1,45 @@
+created: '2025-02-15T16:46:10.945593+00:00'
+modified: '2025-02-17T00:10:01.193036+00:00'
+pattern: false
+entry:
+  _id: 695f915b-3da6-457f-b745-d00aa62773c1
+  _name: Article 4
+  _slug: article-4
+  type: article
+  fields:
+    tags:
+      type: contentReference
+      value: ${#jptr:/ref-695f915b-3da6-457f-b745-d00aa62773c1-tags/entries}
+    title:
+      type: text
+      value: Article 4
+    description:
+      type: richText
+      value:
+        root:
+          type: root
+          format: ''
+          indent: 0
+          version: 1
+          children:
+            - type: paragraph
+              format: ''
+              indent: 0
+              version: 1
+              children:
+                - mode: normal
+                  text: Content for Article 4
+                  type: text
+                  style: ''
+                  detail: 0
+                  format: 0
+                  version: 1
+              direction: ltr
+              textStyle: ''
+              textFormat: 0
+          direction: ltr
+  _dataResources:
+    ref-695f915b-3da6-457f-b745-d00aa62773c1-tags:
+      type: uniformContentInternalReference
+      variables:
+        entryIds: 670c1471-f4b8-46b4-bd57-34d8f519d06d

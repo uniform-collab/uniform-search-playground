@@ -1,0 +1,31 @@
+composition:
+  _name: Category Page Pattern
+  _id: 29bb59ee-b18b-4923-9358-32b5c14339f1
+  type: page
+  parameters:
+    metaTitle:
+      type: text
+      value: This content comes from Category Pattern
+  slots:
+    content:
+      - _id: 7f7b7c18-4fa0-494b-84f9-da8c68f833eb
+        type: $slotSection
+        parameters:
+          name:
+            type: text
+            value: CategoryOverridable
+        _overridability:
+          hideLockedParameters: true
+      - _id: 30a67154-4495-4806-802e-a64bd177ba0b
+        type: hero
+        parameters:
+          title:
+            type: text
+            value: This content comes from Category Pattern
+        _overridability:
+          hideLockedParameters: true
+  _overridability:
+    hideLockedParameters: true
+created: '2024-10-03T11:12:23.899893+00:00'
+modified: '2024-10-03T11:13:40.570476+00:00'
+pattern: true

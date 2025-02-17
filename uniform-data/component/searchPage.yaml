@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=<https://uniform.app/schemas/json-schema/component-definition/v1.json>
+$schema: https://uniform.app/schemas/json-schema/component-definition/v1.json
+id: searchPage
+name: 'Search Page '
+icon: search-loading
+parameters:
+  - id: filterOptions
+    name: Filter Options
+    type: text
+    typeConfig:
+      regex: ^([a-zA-Z0-9._]+)(,[a-zA-Z0-9._]+)*$
+      required: true
+useTeamPermissions: true
+slots:
+  - id: searchResults
+    name: SearchResults
+    allowedComponents:
+      - $loop
+      - articlecard
+    allowAllComponents: false
+    inheritAllowedComponents: false
+    patternsInAllowedComponents: false
+titleParameter: filterOptions
+canBeComposition: false
+created: '2025-02-15T16:48:16.890232+00:00'
+updated: '2025-02-16T23:59:12.732792+00:00'

@@ -1,0 +1,33 @@
+composition:
+  _name: Subcategory Page pattern
+  _id: 7495fda9-2219-4f2b-957b-605897c1dcfd
+  type: page
+  parameters:
+    metaTitle:
+      type: text
+      value: This content comes from Sub-Category page pattern
+  slots:
+    content:
+      - _id: 1e3120d2-4cd4-4866-8d57-99dc683ad0f0
+        type: $slotSection
+        parameters:
+          name:
+            type: text
+            value: Sub-CategoryOverridable
+        _overridability:
+          hideLockedParameters: true
+      - _id: ee4bb71f-c257-4cb6-bcad-519568457c68
+        type: hero
+        parameters:
+          title:
+            type: text
+            value: This content comes from Sub-Category page pattern
+        _overridability:
+          hideLockedParameters: true
+  _overridability:
+    parameters:
+      $viz: 'yes'
+    hideLockedParameters: true
+created: '2024-10-03T11:13:55.700565+00:00'
+modified: '2024-10-03T12:56:01.319628+00:00'
+pattern: true

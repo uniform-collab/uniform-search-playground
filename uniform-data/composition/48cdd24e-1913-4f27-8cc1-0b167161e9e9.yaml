@@ -1,0 +1,244 @@
+composition:
+  _name: PDP+PLP
+  _id: 48cdd24e-1913-4f27-8cc1-0b167161e9e9
+  _slug: a
+  type: page
+  slots:
+    content:
+      - _id: 96044cb9-015d-49bb-b549-73bd0e0c8fc6
+        type: page
+        _pattern: 41a4aa09-a6b5-4348-aa1d-f2509c813996
+        _dataResources:
+          Pokemon Content:
+            type: pokemonbyname
+            variables:
+              name: ${sub-sub-category}
+      - _id: c70f6d4f-4428-4002-a754-2bc0091c44d7
+        type: page
+        _pattern: 7495fda9-2219-4f2b-957b-605897c1dcfd
+  _dataResources:
+    Pokemon Product:
+      type: pokemonbyname
+      variables:
+        name: ${sub-sub-category}
+  _overrides:
+    96044cb9-015d-49bb-b549-73bd0e0c8fc6:
+      parameters:
+        $viz:
+          type: $viz
+          value:
+            criteria:
+              clauses:
+                - op: '!empty'
+                  rule: $dt
+                  value: ''
+                  source: ${#jptr:/Pokemon Product/name}
+    c70f6d4f-4428-4002-a754-2bc0091c44d7:
+      parameters:
+        $viz:
+          type: $viz
+          value:
+            criteria:
+              clauses:
+                - op: empty
+                  rule: $dt
+                  value: ''
+                  source: ${#jptr:/Pokemon Product/name}
+    96044cb9-015d-49bb-b549-73bd0e0c8fc6|46a01f92-7552-4ef4-b307-5f0dee8f8746:
+      slots:
+        $slotSectionItems:
+          - _id: 683670c6-036f-43ce-8a36-21cf2b65ebf8
+            type: hero
+            parameters:
+              title:
+                type: text
+                value: This content comes from Instance but not Pattern
+              description:
+                type: richText
+                value:
+                  root:
+                    type: root
+                    format: ''
+                    indent: 0
+                    version: 1
+                    children:
+                      - type: paragraph
+                        format: ''
+                        indent: 0
+                        version: 1
+                        children:
+                          - mode: normal
+                            text: 'Dynamic Inputs:'
+                            type: text
+                            style: ''
+                            detail: 0
+                            format: 0
+                            version: 1
+                          - type: linebreak
+                            version: 1
+                          - mode: normal
+                            text: 'category: '
+                            type: text
+                            style: ''
+                            detail: 0
+                            format: 0
+                            version: 1
+                          - type: variable
+                            version: 1
+                            reference: category
+                        direction: ltr
+                        textStyle: ''
+                        textFormat: 0
+                      - type: paragraph
+                        format: ''
+                        indent: 0
+                        version: 1
+                        children:
+                          - mode: normal
+                            text: 'sub-category: '
+                            type: text
+                            style: ''
+                            detail: 0
+                            format: 0
+                            version: 1
+                          - type: variable
+                            version: 1
+                            reference: sub-category
+                        direction: ltr
+                        textStyle: ''
+                        textFormat: 0
+                      - type: paragraph
+                        format: ''
+                        indent: 0
+                        version: 1
+                        children:
+                          - mode: normal
+                            text: 'product: '
+                            type: text
+                            style: ''
+                            detail: 0
+                            format: 0
+                            version: 1
+                          - type: variable
+                            version: 1
+                            reference: sub-sub-category
+                        direction: ltr
+                        textStyle: ''
+                        textFormat: 0
+                    direction: ltr
+                conditions:
+                  - id: 0
+                    when:
+                      clauses:
+                        - op: has
+                          rule: $qk
+                          value: mobile
+                          source: device
+                    value:
+                      root:
+                        type: root
+                        format: ''
+                        indent: 0
+                        version: 1
+                        children:
+                          - type: paragraph
+                            format: ''
+                            indent: 0
+                            version: 1
+                            children:
+                              - mode: normal
+                                text: mobile value
+                                type: text
+                                style: ''
+                                detail: 0
+                                format: 0
+                                version: 1
+                            direction: ltr
+                            textStyle: ''
+                            textFormat: 0
+                        direction: ltr
+    c70f6d4f-4428-4002-a754-2bc0091c44d7|1e3120d2-4cd4-4866-8d57-99dc683ad0f0:
+      slots:
+        $slotSectionItems:
+          - _id: 08832776-9dca-412d-8b78-326249b6aa88
+            type: hero
+            parameters:
+              title:
+                type: text
+                value: This content comes from instance but not Pattern.
+              description:
+                type: richText
+                value:
+                  root:
+                    type: root
+                    format: ''
+                    indent: 0
+                    version: 1
+                    children:
+                      - type: paragraph
+                        format: ''
+                        indent: 0
+                        version: 1
+                        children:
+                          - mode: normal
+                            text: 'Dynamic Inputs:'
+                            type: text
+                            style: ''
+                            detail: 0
+                            format: 0
+                            version: 1
+                          - type: linebreak
+                            version: 1
+                          - mode: normal
+                            text: 'category: '
+                            type: text
+                            style: ''
+                            detail: 0
+                            format: 0
+                            version: 1
+                          - type: variable
+                            version: 1
+                            reference: category
+                        direction: ltr
+                        textStyle: ''
+                        textFormat: 0
+                      - type: paragraph
+                        format: ''
+                        indent: 0
+                        version: 1
+                        children:
+                          - mode: normal
+                            text: 'sub-category: '
+                            type: text
+                            style: ''
+                            detail: 0
+                            format: 0
+                            version: 1
+                          - type: variable
+                            version: 1
+                            reference: sub-category
+                        direction: ltr
+                        textStyle: ''
+                        textFormat: 0
+                      - type: paragraph
+                        format: ''
+                        indent: 0
+                        version: 1
+                        children:
+                          - mode: normal
+                            text: 'sub-sub-category: '
+                            type: text
+                            style: ''
+                            detail: 0
+                            format: 0
+                            version: 1
+                          - type: variable
+                            version: 1
+                            reference: sub-sub-category
+                        direction: ltr
+                        textStyle: ''
+                        textFormat: 0
+                    direction: ltr
+created: '2024-10-03T11:32:55.462202+00:00'
+modified: '2024-10-09T14:58:44.969671+00:00'
+pattern: false

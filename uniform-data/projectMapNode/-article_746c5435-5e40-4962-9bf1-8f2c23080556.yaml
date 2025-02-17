@@ -1,0 +1,9 @@
+id: 746c5435-5e40-4962-9bf1-8f2c23080556
+name: article
+order: 500
+path: /articles/:article
+type: placeholder
+pathSegment: ':article'
+data:
+  previewValue: ''
+projectMapId: 8a35c419-5150-4f76-aa21-7e4976c9dfcb

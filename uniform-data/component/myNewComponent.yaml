@@ -1,0 +1,17 @@
+# yaml-language-server: $schema=<https://uniform.app/schemas/json-schema/component-definition/v1.json>
+$schema: https://uniform.app/schemas/json-schema/component-definition/v1.json
+id: myNewComponent
+name: My New Component
+icon: screen
+parameters:
+  - id: test
+    name: test
+    type: text
+    typeConfig: null
+    localizable: true
+useTeamPermissions: true
+slots: []
+titleParameter: test
+canBeComposition: false
+created: '2024-07-03T06:42:52.795557+00:00'
+updated: '2024-07-03T06:42:52.795557+00:00'

@@ -1,0 +1,16 @@
+id: tag
+name: Tag
+created: '2025-02-17T00:07:31.111966+00:00'
+updated: '2025-02-17T00:07:31.111966+00:00'
+slugSettings: {}
+useTeamPermissions: true
+fields:
+  - id: name
+    name: Name
+    type: text
+    typeConfig:
+      required: true
+entryName: name
+icon: file-document
+type: contentType
+permissions: []

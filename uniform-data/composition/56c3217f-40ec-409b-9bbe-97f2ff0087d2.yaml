@@ -1,0 +1,9 @@
+composition:
+  _name: myfriend
+  _id: 56c3217f-40ec-409b-9bbe-97f2ff0087d2
+  _slug: myfriend
+  type: page
+  parameters: {}
+created: '2024-07-03T07:31:00.280036+00:00'
+modified: '2024-07-03T07:31:00.280036+00:00'
+pattern: false

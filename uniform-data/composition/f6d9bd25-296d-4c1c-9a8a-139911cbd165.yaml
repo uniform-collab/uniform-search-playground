@@ -1,0 +1,27 @@
+composition:
+  _name: search
+  _id: f6d9bd25-296d-4c1c-9a8a-139911cbd165
+  _slug: searcg
+  type: page
+  parameters:
+    metaTitle:
+      type: text
+      value: Search
+  slots:
+    content:
+      - _id: 448f2800-05af-4031-8a45-2b4e3f50fde1
+        type: searchPage
+        parameters:
+          filterOptions:
+            type: text
+            value: title,tags.name
+  _dataResources:
+    Query Article Content:
+      type: queryArticle
+      variables:
+        search: ''
+        filters: '{"type[eq]":"article"}'
+        contentTypes: article
+created: '2025-02-15T16:10:06.844929+00:00'
+modified: '2025-02-17T00:10:52.989073+00:00'
+pattern: false
