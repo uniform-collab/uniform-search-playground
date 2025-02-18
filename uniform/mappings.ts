@@ -1,5 +1,15 @@
-// components will be registered here
+import { ResolveComponentResultWithType } from "@/uniform/models";
 export { pageMapping } from "../components/page/mapping";
-export { heroMapping } from "../components/hero/mapping";
-export { articleSearchComponentMapping } from "../components/ArticleSearchComponent/mapping";
-export { articleCardMapping } from "../components/Search/ArticleCard/mapping";
+import { SearchContainer } from "../components/Search/SearchContainer";
+import { SearchResultCard } from "../components/Search/SearchResultCard";
+
+// components will be registered here
+export const searchContainerMapping: ResolveComponentResultWithType = {
+    type: "searchContainer",
+    component: SearchContainer,
+};
+
+export const searchResultCardMapping: ResolveComponentResultWithType = {
+    type: "searchResultCard",
+    component: SearchResultCard,
+};

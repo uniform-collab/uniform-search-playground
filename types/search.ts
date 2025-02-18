@@ -1,8 +1,5 @@
-import { getKnowledgeBaseArticles } from "@/uniform/search/client";
-import { RichTextNode } from "@uniformdev/richtext";
-
 //Define the structure of a knowledge base article
-interface KnowledgeBaseArticle {
+interface SearchResult {
   id: string;
   title: string;
   description: RichTextDescription;
@@ -16,8 +13,8 @@ interface RichTextDescription {
 }
 
 // Define the structure of the response from the API
-interface ArticlesWithPagination {
-  items: KnowledgeBaseArticle[];
+interface SearchResultsWithPagination {
+  items: SearchResult[];
   page: number;
   perPage: number;
   totalCount: number;
@@ -35,8 +32,8 @@ interface Facets {
 }
 
 export {
-  type KnowledgeBaseArticle,
-  type ArticlesWithPagination,
+  type SearchResult,
+  type SearchResultsWithPagination,
   type Facets,
   type FacetValueCounts,
   type RichTextDescription,

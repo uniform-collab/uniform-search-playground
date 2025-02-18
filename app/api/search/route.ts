@@ -1,8 +1,8 @@
-import { getKnowledgeBaseArticles } from "../../../uniform/search/client"; // adjust the path accordingly
-import { ArticlesWithPagination } from "../../../types/search"; // adjust according to where your types are defined
+import { getKnowledgeBaseArticles } from "@/uniform/search/client"; // adjust the path accordingly
+import { SearchResultsWithPagination } from "@/types/search"; // adjust according to where your types are defined
 import { NextRequest, NextResponse } from "next/server";
 
-export const GET = async function handler(req: NextRequest, res: NextResponse) {
+export const GET = async function handler(req: NextRequest) {
   if (req.method === "GET") {
     try {
       // Parse the URL to extract search parameters
@@ -22,7 +22,7 @@ export const GET = async function handler(req: NextRequest, res: NextResponse) {
       const parsedFilters = filters ? JSON.parse(filters as string) : {};
       const orderBy = searchParams.get("orderBy") || "updated_at_ASC";
       console.log("parsedFilters", parsedFilters);
-      const articles: ArticlesWithPagination = await getKnowledgeBaseArticles({
+      const articles: SearchResultsWithPagination = await getKnowledgeBaseArticles({
         page: Number(page) || 0,
         perPage: Number(perPage) || 10,
         search: search?.toString() || "",

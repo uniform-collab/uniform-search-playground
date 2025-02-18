@@ -108,10 +108,12 @@ a {
   position: absolute;
   left: 0.3rem;
   bottom: 0.3rem;
-  background-image: linear-gradient(to right,
-      #d31027 0%,
-      #ea384d 51%,
-      #d31027 100%);
+  background-image: linear-gradient(
+    to right,
+    #d31027 0%,
+    #ea384d 51%,
+    #d31027 100%
+  );
   margin: 10px;
   padding: 15px 30px;
   text-align: center;
@@ -125,10 +127,12 @@ a {
 }
 
 .preview-button-on {
-  background-image: linear-gradient(to right,
-      #d31027 0%,
-      #ea384d 51%,
-      #d31027 100%);
+  background-image: linear-gradient(
+    to right,
+    #d31027 0%,
+    #ea384d 51%,
+    #d31027 100%
+  );
   color: white;
   box-shadow: 0 0 20px #eee;
 }
@@ -141,10 +145,12 @@ red: #f4220b
 */
 
 .preview-button-off {
-  background-image: linear-gradient(to right,
-      #83c6e1 0%,
-      #438fd5 51%,
-      #83c6e1 100%);
+  background-image: linear-gradient(
+    to right,
+    #83c6e1 0%,
+    #438fd5 51%,
+    #83c6e1 100%
+  );
   color: white;
   box-shadow: 0 0 20px #eee;
 }
@@ -180,7 +186,9 @@ red: #f4220b
   border: 1px solid #ccc;
   appearance: none;
   /* Remove default styling */
-  background: #fff url('data:image/svg+xml;utf8,<svg fill="%23ccc" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5H7z"/></svg>') no-repeat right 10px center;
+  background: #fff
+    url('data:image/svg+xml;utf8,<svg fill="%23ccc" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5H7z"/></svg>')
+    no-repeat right 10px center;
   cursor: pointer;
   transition: border-color 0.3s ease;
 }

@@ -1,13 +1,11 @@
 import { UniformContext } from "@uniformdev/canvas-next-rsc";
 import { Inter } from "next/font/google";
 
-import "./globals.css";
+import "./styles/globals.css";
 import { UniformClientContext } from "@/uniform/clientContext";
 import { Metadata } from "next";
 
 const inter = Inter({ subsets: ["latin"] });
-
-// export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   metadataBase: new URL(`https://www.mywebsite.com`),

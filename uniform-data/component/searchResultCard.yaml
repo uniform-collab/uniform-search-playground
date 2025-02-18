@@ -1,8 +1,8 @@
 # yaml-language-server: $schema=<https://uniform.app/schemas/json-schema/component-definition/v1.json>
 $schema: https://uniform.app/schemas/json-schema/component-definition/v1.json
-id: articlecard
-name: ArticleCard
-icon: toggle-square
+id: searchResultCard
+name: Search Result Card
+icon: card-clubs
 parameters:
   - id: title
     name: Title
@@ -47,5 +47,5 @@ useTeamPermissions: true
 slots: []
 titleParameter: title
 canBeComposition: false
-created: '2025-02-15T17:26:57.309117+00:00'
-updated: '2025-02-16T22:45:45.786904+00:00'
+created: '2025-02-18T22:09:43.484871+00:00'
+updated: '2025-02-18T22:10:03.791726+00:00'

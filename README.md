@@ -1,6 +1,6 @@
-# Hello World starter for Next.js app router
+# Search API example app
 
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+This starter is based on Next.js App Router but can be used with any other React-based framework.
 
 ## Pre-requisites
 

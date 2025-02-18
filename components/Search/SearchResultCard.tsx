@@ -1,8 +1,18 @@
 import React from "react";
 import { renderToHtml, RichTextNode } from "@uniformdev/richtext";
-import { Parameters } from "./props";
+import { RichTextDescription } from "@/types/search";
 
-export const ArticleCard = ({ title, description }: Parameters) => {
+type SearchResultCardProps = {
+  title: string;
+  description: RichTextDescription;
+};
+
+export type Slots = string;
+
+export const SearchResultCard = ({
+  title,
+  description,
+}: SearchResultCardProps) => {
   let htmlDescription = "";
   if (
     description?.type === "richText" &&
@@ -34,4 +44,4 @@ export const ArticleCard = ({ title, description }: Parameters) => {
   );
 };
 
-export default ArticleCard;
+export default SearchResultCard;

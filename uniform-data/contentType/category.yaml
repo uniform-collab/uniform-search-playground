@@ -1,8 +1,9 @@
 id: category
 name: Category
-created: '2025-02-17T22:12:52.729416+00:00'
-updated: '2025-02-17T22:12:52.729416+00:00'
-slugSettings: {}
+created: '2025-02-18T21:35:53.502831+00:00'
+updated: '2025-02-18T21:39:00.225714+00:00'
+slugSettings:
+  required: 'no'
 useTeamPermissions: true
 fields:
   - id: name

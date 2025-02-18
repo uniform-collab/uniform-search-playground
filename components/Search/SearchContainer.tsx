@@ -1,55 +1,52 @@
 "use client";
 import React, { useState, useEffect, Suspense, lazy } from "react";
-import SearchInput from "../Search/SearchInput/index";
 import { ComponentProps } from "@uniformdev/canvas-next-rsc/component";
-import { Slots, Parameters } from "./props";
+
 import {
-  ArticlesWithPagination,
   Facets,
-  KnowledgeBaseArticle,
+  SearchResult,
+  SearchResultsWithPagination,
 } from "@/types/search";
-import { Facet } from "../Search/FilterPanel";
+import SearchInput from "./SearchInput";
+import { Facet } from "./FilterPanel";
 
-const ArticleCard = lazy(() => import("../Search/ArticleCard"));
-const FilterPanel = lazy(() => import("../Search/FilterPanel"));
+const SearchResultCard = lazy(() => import("./SearchResultCard"));
+const FilterPanel = lazy(() => import("./FilterPanel"));
 
-export const ArticleSearchComponent = ({
-  component,
-  context,
-  slots,
-  filterOptions = "",
-}: ComponentProps<Parameters, Slots>) => {
+export const SearchContainer = ({
+  selectedFacets = [],
+}: ComponentProps<SearchComponentProps, SearchComponentSlots>) => {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [filters, setFilters] = useState<Record<string, any>>({});
-  const [articles, setArticles] = useState<KnowledgeBaseArticle[] | null>(null);
+  const [searchResults, setSearchResults] = useState<SearchResult[] | null>(
+    null
+  );
   const [facets, setFacets] = useState<Facets>({});
-  const [initialFacets, setInitialFacets] = useState<Facets>({});
-  const [filterDefs, setFilterDefs] = useState<{ filterName: string; filterField: string }[]>([]);
+  const [filterDefs, setFilterDefs] = useState<
+    { filterName: string; filterField: string }[]
+  >([]);
 
   useEffect(() => {
-    const fetchArticles = async () => {
+    const fetchSearchResults = async () => {
       try {
-        console.log(filterOptions)
-        const optionsArray = filterOptions
-          .split(",")
+        const optionsArray = selectedFacets
           .map((pair) => pair.trim())
           .filter(Boolean);
 
-        console.log(optionsArray)
         // For each comma-separated pair, we get:
         //  e.g. "Category:category.name" -> { filterName: "Category", filterField: "fields.category.name" }
         const pairs = optionsArray.map((item) => {
-          const [filterName, filterField] = item.split(":").map((s) => s.trim());
-          return { filterName, filterField: "fields." + filterField };
+          const [filterName, filterField] = item
+            .split(":")
+            .map((s) => s.trim());
+          return { filterName, filterField: "fields." + filterName };
         });
 
         //save pairs for FilterPanel
         setFilterDefs(pairs);
         // Build the facetBy string
         // e.g. "fields.category.name,fields.tags.name"
-        const facetByParams = pairs
-          .map((p) => `${p.filterField}`)
-          .join(",");
+        const facetByParams = pairs.map((p) => `${p.filterField}`).join(",");
 
         const response = await fetch(
           `/api/search?search=${encodeURIComponent(
@@ -58,21 +55,20 @@ export const ArticleSearchComponent = ({
             JSON.stringify(filters)
           )}&facetBy=${facetByParams}`
         );
-        const data: ArticlesWithPagination = await response.json();
-        setArticles(data.items);
+        const data: SearchResultsWithPagination = await response.json();
+        setSearchResults(data.items);
 
         // Store initial facets only once
-        if (!Object.keys(initialFacets).length) {
-          setInitialFacets(data.facets);
+        if (!Object.keys(facets).length) {
+          setFacets(data.facets);
         }
-        setFacets(data.facets);
       } catch (error) {
-        console.error("Failed to fetch articles:", error);
-        setArticles([]);
+        console.error("Failed to fetch search results:", error);
+        setSearchResults([]);
       }
     };
-    fetchArticles();
-  }, [searchTerm, filters, filterOptions]);
+    fetchSearchResults();
+  }, [searchTerm, filters, selectedFacets]);
 
   const handleFilterPanelChange = (filter: Record<string, string | null>) => {
     // If the user unchecks a box, remove that filter from state
@@ -88,16 +84,16 @@ export const ArticleSearchComponent = ({
     });
   };
 
-  // Turn the initialFacets object into an array of { name, buckets } for FilterPanel
-  const facetArray: Facet[] = Object.entries(initialFacets).map(
-    ([facetName, facetValues]) => ({
-      name: facetName,
-      buckets: Object.entries(facetValues || {}).map(([val, count]) => ({
-        value: val,
-        count,
-      })),
-    })
-  );
+  // Turn the facets object into an array of { name, buckets } for FilterPanel
+  const facetArray: Facet[] = facets
+    ? Object.entries(facets).map(([facetName, facetValues]) => ({
+        name: facetName,
+        buckets: Object.entries(facetValues || {}).map(([val, count]) => ({
+          value: val,
+          count,
+        })),
+      }))
+    : [];
 
   // Example: gather currently applied filters for displaying badges
   const activeFilters = Object.entries(filters).map(([facetName, filterObj]) =>
@@ -113,27 +109,29 @@ export const ArticleSearchComponent = ({
       {/* Fixed left panel */}
       <aside className="fixed top-0 left-0 w-64 h-screen bg-white border-r p-4 hidden sm:block overflow-y-auto">
         <h2 className="text-xl font-bold mb-4">Filters</h2>
-        <Suspense fallback={
-          <div className="animate-pulse space-y-4">
-            {[...Array(3)].map((_, i) => (
-              <div key={i} className="space-y-2">
-                <div className="h-5 bg-gray-200 rounded w-1/2" />
-                <div className="space-y-2">
-                  {[...Array(4)].map((_, j) => (
-                    <div key={j} className="flex items-center space-x-2">
-                      <div className="h-4 w-4 bg-gray-200 rounded" />
-                      <div className="h-4 bg-gray-200 rounded w-2/3" />
-                    </div>
-                  ))}
+        <Suspense
+          fallback={
+            <div className="animate-pulse space-y-4">
+              {[...Array(3)].map((_, i) => (
+                <div key={i} className="space-y-2">
+                  <div className="h-5 bg-gray-200 rounded w-1/2" />
+                  <div className="space-y-2">
+                    {[...Array(4)].map((_, j) => (
+                      <div key={j} className="flex items-center space-x-2">
+                        <div className="h-4 w-4 bg-gray-200 rounded" />
+                        <div className="h-4 bg-gray-200 rounded w-2/3" />
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
-        }>
-          <FilterPanel 
-            facets={facetArray} 
-            filterDefs={filterDefs} 
-            onChange={handleFilterPanelChange} 
+              ))}
+            </div>
+          }
+        >
+          <FilterPanel
+            facets={facetArray}
+            filterDefs={filterDefs}
+            onChange={handleFilterPanelChange}
           />
         </Suspense>
       </aside>
@@ -163,11 +161,14 @@ export const ArticleSearchComponent = ({
           )}
 
           <div className="mt-4">
-            <Suspense 
+            <Suspense
               fallback={
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                   {[...Array(6)].map((_, i) => (
-                    <div key={i} className="bg-white border rounded-md p-4 h-64 animate-pulse">
+                    <div
+                      key={i}
+                      className="bg-white border rounded-md p-4 h-64 animate-pulse"
+                    >
                       <div className="aspect-[3/2] bg-gray-200 mb-4" />
                       <div className="h-4 bg-gray-200 rounded w-3/4 mb-2" />
                       <div className="h-4 bg-gray-200 rounded w-1/2" />
@@ -177,21 +178,32 @@ export const ArticleSearchComponent = ({
               }
             >
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                {articles === null ? (
+                {searchResults === null ? (
                   [...Array(6)].map((_, i) => (
-                    <div key={i} className="bg-white border rounded-md p-4 h-64 animate-pulse">
+                    <div
+                      key={i}
+                      className="bg-white border rounded-md p-4 h-64 animate-pulse"
+                    >
                       <div className="aspect-[3/2] bg-gray-200 mb-4" />
                       <div className="h-4 bg-gray-200 rounded w-3/4 mb-2" />
                       <div className="h-4 bg-gray-200 rounded w-1/2" />
                     </div>
                   ))
-                ) : articles.length > 0 ? (
-                  articles.map((article) => (
-                    <ArticleCardWrapper key={article.id} article={article} />
+                ) : searchResults?.length > 0 ? (
+                  searchResults.map((r, key) => (
+                    <div
+                      key={key}
+                      className="bg-white border rounded-md p-4 shadow-sm"
+                    >
+                      <Suspense>
+                        <SearchResultCard {...r} />
+                      </Suspense>
+                    </div>
                   ))
                 ) : (
                   <div className="col-span-full py-8 text-center text-gray-500">
-                    No articles found. Try adjusting your search or filters.
+                    No searchResults found. Try adjusting your search or
+                    filters.
                   </div>
                 )}
               </div>
@@ -203,18 +215,10 @@ export const ArticleSearchComponent = ({
   );
 };
 
-// Helper for lazy-loaded ArticleCard
-function ArticleCardWrapper({ article }: { article: KnowledgeBaseArticle }) {
-  return (
-    <div className="bg-white border rounded-md p-4 shadow-sm">
-      <Suspense fallback={<p>Loading card...</p>}>
-        <ArticleCard
-          title={article.title}
-          description={article.description}
-        />
-      </Suspense>
-    </div>
-  );
-}
+export type SearchComponentProps = {
+  selectedFacets: string[];
+};
 
-export default ArticleSearchComponent;
+export type SearchComponentSlots = "searchResults";
+
+export default SearchContainer;

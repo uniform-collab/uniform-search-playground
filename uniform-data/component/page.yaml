@@ -23,7 +23,7 @@ slots:
       - $p:7495fda9-2219-4f2b-957b-605897c1dcfd
       - searchPage
       - searchComponent
-      - articleSearchComponent
+      - searchContainer
     allowAllComponents: false
     inheritAllowedComponents: false
     patternsInAllowedComponents: true

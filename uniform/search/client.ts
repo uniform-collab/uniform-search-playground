@@ -1,8 +1,7 @@
-import { ArticlesWithPagination, KnowledgeBaseArticle } from "@/types/search";
+import { SearchResultsWithPagination, SearchResult } from "@/types/search";
 import {
   CANVAS_PUBLISHED_STATE,
   ContentClient,
-  Entry,
 } from "@uniformdev/canvas";
 
 export enum UniformContentType {
@@ -11,8 +10,6 @@ export enum UniformContentType {
 const getContentClient = () => {
   return new ContentClient({
     apiKey: process.env.UNIFORM_API_KEY,
-    apiHost: process.env.UNIFORM_CLI_BASE_URL,
-    edgeApiHost: process.env.UNIFORM_CLI_BASE_EDGE_URL,
     projectId: process.env.UNIFORM_PROJECT_ID,
   });
 };
@@ -28,7 +25,6 @@ export const getMemoizedContentClient = (() => {
 export const getKnowledgeBaseArticles = async ({
   page = 0,
   perPage = 10,
-  preview = false,
   filters = {},
   search = "",
   orderBy,
@@ -41,7 +37,7 @@ export const getKnowledgeBaseArticles = async ({
   search?: string;
   orderBy?: string;
   facetFields?: string[]; // Renamed from `facets` to `facetFields`
-}): Promise<ArticlesWithPagination> => {
+}): Promise<SearchResultsWithPagination> => {
   const response = await getMemoizedContentClient().getEntries({
     filters: {
       ...filters,
@@ -59,7 +55,7 @@ export const getKnowledgeBaseArticles = async ({
   });
 
   const { facets } = response as any; // Facets in response remain unchanged
-  const items: KnowledgeBaseArticle[] = response.entries.map(
+  const items: SearchResult[] = response.entries.map(
     (entryResponse: any) => {
       const entry = entryResponse.entry;
       return {
